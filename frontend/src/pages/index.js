@@ -28,11 +28,11 @@ export default function Home({blogs}) {
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossOrigin="anonymous"
       />   
-    <div id="preloader">
+    {/* <div id="preloader">
         <div id="main-ld">
 			<div id="loader"></div>  
 		</div>
-    </div>
+    </div> */}
 	
     
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">

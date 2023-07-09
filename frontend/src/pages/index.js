@@ -1,17 +1,26 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { createClient } from "next-sanity";
-import PortableText from "react-portable-text"
 // import "../../src/styles/style.css";
 import Head from 'next/head';
 import Script from 'next/script';
+import imageUrlBuilder from '@sanity/image-url'
+// import RichText from '@/RichText/RichText';
 
 
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({blogs}) {
+
   // console.log("🚀 ~ file: index.js:8 ~ Home ~ blogs:", blogs)
-  // console.log(blogs)
+  console.log(blogs)
+  const client = createClient({
+    projectId: 'l4fed5ma',
+    dataset: 'production',
+    useCdn: false
+  });
+  
+const builder = imageUrlBuilder(client)
   return (
     <>
        <Head>
@@ -378,27 +387,41 @@ export default function Home({blogs}) {
             </div>
 			
 			<div className="row">
-				<div className="col-md-4 col-sm-6 col-lg-4">
+                {
+                    blogs.map((nodes)=>{
+                    //   console.log(nodes)
+                    return <div className="col-md-4 col-sm-6 col-lg-4" key={nodes.slug.current}>
 					<div className="post-box">
 						<div className="post-thumb">
-							<img src="uploads/blog-01.jpg" className="img-fluid" alt="post-img" />
+                        {nodes.image && (
+                <Image
+                src={`https://cdn.sanity.io/images/${encodeURIComponent(
+                    nodes.image.asset._ref
+                  )}`}
+                  alt="post-img"
+                  width={200}
+                  height={200}
+                  className="img-fluid"
+                />
+              )}
 							<div className="date">
-								<span>06</span>
-								<span>Aug</span>
+								{nodes.publishAt}
 							</div>
 						</div>
 						<div className="post-info">
-							<h4>Quisque auctor lectus interdum nisl accumsan venenatis.</h4>
+							<h4>{nodes.heading}</h4>
 							<ul>
-                                <li>by admin</li>
-                                <li>Apr 21, 2018</li>
-                                <li><a href="#"><b> Comments</b></a></li>
+                                <li>{nodes.author.heading}</li>
                             </ul>
-							<p>Etiam materials ut mollis tellus, vel posuere nulla. Etiam sit amet massa sodales aliquam at eget quam. Integer ultricies et magna quis.</p>
+							{/* <RichText content={...blogs.content}/> */}
+                            Do you grow peas, beans or other legumes in your backyard or garden? Have you ever heard about seed inoculation and how you can use it to produce more yield? Let’s learn about this and get the most out of your plants. 
 						</div>
 					</div>
 				</div>
-				<div className="col-md-4 col-sm-6 col-lg-4">
+                    })
+                }
+				
+				{/* <div className="col-md-4 col-sm-6 col-lg-4">
 					<div className="post-box">
 						<div className="post-thumb">
 							<img src="uploads/blog-02.jpg" className="img-fluid" alt="post-img" />
@@ -437,7 +460,7 @@ export default function Home({blogs}) {
 							<p>Etiam materials ut mollis tellus, vel posuere nulla. Etiam sit amet massa sodales aliquam at eget quam. Integer ultricies et magna quis.</p>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 			
 		</div>

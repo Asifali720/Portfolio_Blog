@@ -4,9 +4,27 @@ export default {
       title: 'Blog',
     fields: [
       {
-        name: 'name',
+        name: 'heading',
         type: 'string',
-        title: 'Name'
+        title: 'Heading'
+      },
+      {
+        title: 'Slug',
+        name: 'slug',
+        type: 'slug',
+        options: {
+          source: 'title',
+          maxLength: 200, // will be ignored if slugify is set
+          slugify: input => input
+                               .toLowerCase()
+                               .replace(/\s+/g, '-')
+                               .slice(0, 200)
+        }
+      },
+      {
+        title: 'Publish At',
+        name: 'publishAt',
+        type: 'date'
       },
       {
         name: 'content',
@@ -37,9 +55,30 @@ export default {
         ]
       },
       {
-        title: 'Image',
-        name: 'poster',
-        type: 'image',
-    } 
+        title: 'Author',
+        name: 'author',
+        type: 'array',
+        of: [{type: 'author'}]
+    }, 
+    {
+      title: 'Image',
+      name: 'image',
+      type: 'image',
+      options: {
+        hotspot: true // <-- Defaults to false
+      },
+      fields: [
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        },
+        {
+          name: 'attribution',
+          type: 'string',
+          title: 'Attribution',
+        }
+      ]
+    }
     ]
   }

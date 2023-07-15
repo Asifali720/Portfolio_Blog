@@ -5,6 +5,8 @@ import { createClient } from "next-sanity";
 import Head from 'next/head';
 import Script from 'next/script';
 import imageUrlBuilder from '@sanity/image-url'
+import Navbar from '@/component/navbar/Navbar';
+// import Navbar from '@/component/navbar/navbar';
 // import RichText from '@/RichText/RichText';
 
 
@@ -43,46 +45,9 @@ const builder = imageUrlBuilder(client)
 		</div>
     </div> */}
 	
-    
-    <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <div className="container">
-        <a className="navbar-brand js-scroll-trigger" href="#page-top">
-			<img className="img-fluid" src="images/logo.png" alt="" />
-		</a>
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i className="fa fa-bars"></i>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav text-uppercase ml-auto">
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger active" href="#home">Home</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#about">About Us</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#services">Services</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#testimonials">Testimonials</a>
-            </li>
-			<li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#blog">Blog</a>
-            </li>
-			<li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="#contact">Contect Us</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-	
+    <Navbar/>
 	<section id="home" className="main-banner parallaxie" style={{background: "url('uploads/banner-01.jpg')"}}>
-		<div className="heading">
+        <div className="heading">
 			<h1>hello i'm Dominic</h1>
 			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br/>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
 			<h3 className="cd-headline clip is-full-width">
@@ -393,17 +358,15 @@ const builder = imageUrlBuilder(client)
                     return <div className="col-md-4 col-sm-6 col-lg-4" key={nodes.slug.current}>
 					<div className="post-box">
 						<div className="post-thumb">
-                        {nodes.image && (
+                    
                 <Image
-                src={`https://cdn.sanity.io/images/${encodeURIComponent(
-                    nodes.image.asset._ref
-                  )}`}
+                // src={builder.image(nodes.image.asset.url).width(200).url()}
+                src={builder.image(nodes.image.asset._ref).width(200).url()}
                   alt="post-img"
                   width={200}
                   height={200}
-                  className="img-fluid"
+                  className="!w-full !h-[200px] !object-fill"
                 />
-              )}
 							<div className="date">
 								{nodes.publishAt}
 							</div>

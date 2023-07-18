@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import imageUrlBuilder from '@sanity/image-url'
 import Navbar from '@/component/navbar/Navbar';
+import Footer from '@/component/footer/Footer';
 // import Navbar from '@/component/navbar/navbar';
 // import RichText from '@/RichText/RichText';
 
@@ -475,24 +476,7 @@ const builder = imageUrlBuilder(client)
         </div>
     </div>
 
-    <div className="copyrights">
-        <div className="container">
-            <div className="footer-distributed">
-                <div className="footer-left">
-                    <p className="footer-links">
-                        <a href="#">Home</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Pricing</a>
-                        <a href="#">About</a>
-                        <a href="#">Faq</a>
-                        <a href="#">Contact</a>
-                    </p>
-                    <p className="footer-company-name">All Rights Reserved. &copy; 2018 <a href="#">Dominic</a> Design By : 
-					<a href="https://html.design/">html design</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <Footer/>
     </>
     // <main
     //   classNameName={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.classNameName}`}
@@ -629,7 +613,7 @@ export async function getServerSideProps(context) {
     dataset: 'production',
     useCdn: false
   });
-  const query = `*[_type == 'blog']`;
+  const query = `*[_type == 'blog'][0...3]`;
   const blogs = await client.fetch(query);
   return{
     props: {

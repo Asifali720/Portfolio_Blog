@@ -7,6 +7,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import Navbar from '@/component/navbar/Navbar';
 import BlogsSection from '@/component/blogsSection/BlogsSection';
+import Footer from '@/component/footer/Footer';
 
 const Blogs = ({blogs}) => {
     console.log(blogs)
@@ -34,11 +35,10 @@ const Blogs = ({blogs}) => {
         crossOrigin="anonymous"
       />
     <Navbar/>
-    <div className="section-title text-center mt-[100px]">
-                <h3>Blog</h3>
-                <p>Quisque eget nisl id nulla sagittis auctor quis id. Aliquam quis vehicula enim, non aliquam risus.</p>
+    <div className="section-title text-left mt-[100px] px-4 lg:px-20 xl:px-[120px]">
+                <h3>Blogs</h3>
            
-    <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 lg:px-20 xl:px-[120px]'>
+    <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6 '>
       {
       blogs.map((nodes)=>{
         return <BlogsSection {...nodes}/>
@@ -46,6 +46,7 @@ const Blogs = ({blogs}) => {
     }
     </div>
     </div>
+    <Footer/>
     
     </>
    
